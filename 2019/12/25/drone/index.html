@@ -14,27 +14,27 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Drone on Kubernetes安装&amp;emsp;&amp;emsp;Kubernets集群(1.15.5) &amp;emsp;&amp;emsp;Drone持续集成框架 &amp;emsp;&amp;emsp;Harbor私有镜像仓库(1.9.3) &amp;emsp;&amp;emsp;Gitlab代码仓库">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/CreateProject.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/ActivateRepository.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Trusted.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/AddSecret.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/CreateHarborProject.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/AddFile.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Dockerfile.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Deployment.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Ingress.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Clone.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Maven.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Cache.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Publish.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Deploy.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/DroneSuccess.png">
-<meta property="og:image" content="http://yoursite.com/2019/12/25/images/Petclinic.png">
+<meta property="og:image" content="http://yoursite.com/images/CreateProject.png">
+<meta property="og:image" content="http://yoursite.com/images/ActivateRepository.png">
+<meta property="og:image" content="http://yoursite.com/images/Trusted.png">
+<meta property="og:image" content="http://yoursite.com/images/AddSecret.png">
+<meta property="og:image" content="http://yoursite.com/images/CreateHarborProject.png">
+<meta property="og:image" content="http://yoursite.com/images/AddFile.png">
+<meta property="og:image" content="http://yoursite.com/images/Dockerfile.png">
+<meta property="og:image" content="http://yoursite.com/images/Deployment.png">
+<meta property="og:image" content="http://yoursite.com/images/Ingress.png">
+<meta property="og:image" content="http://yoursite.com/images/Clone.png">
+<meta property="og:image" content="http://yoursite.com/images/Maven.png">
+<meta property="og:image" content="http://yoursite.com/images/Cache.png">
+<meta property="og:image" content="http://yoursite.com/images/Publish.png">
+<meta property="og:image" content="http://yoursite.com/images/Deploy.png">
+<meta property="og:image" content="http://yoursite.com/images/DroneSuccess.png">
+<meta property="og:image" content="http://yoursite.com/images/Petclinic.png">
 <meta property="article:published_time" content="2019-12-25T05:45:53.127Z">
-<meta property="article:modified_time" content="2019-12-25T05:52:14.415Z">
+<meta property="article:modified_time" content="2019-12-25T05:57:17.092Z">
 <meta property="article:author" content="wdongyu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2019/12/25/images/CreateProject.png">
+<meta name="twitter:image" content="http://yoursite.com/images/CreateProject.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -113,45 +113,45 @@
 
 <h3 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h3><p>&emsp;&emsp;将Gitlab连接到Drone框架中，可以实现：开发人员本地编写调试，然后推送代码。随后代码在集群中完成打包编译、生成镜像、运行发布等步骤，最终为用户提供服务。具体需要经过如下的配置过程：</p>
 <h4 id="Gitlab连接Drone"><a href="#Gitlab连接Drone" class="headerlink" title="Gitlab连接Drone"></a>Gitlab连接Drone</h4><p>&emsp;&emsp;在Gitlab中创建代码仓库</p>
-<p><img src="../images/CreateProject.png" alt="create a project"></p>
+<p><img src="/images/CreateProject.png" alt="create a project"></p>
 <p>&emsp;&emsp;进入到Drone(<strong><a href="http://ip:31000" target="_blank" rel="noopener">http://ip:31000</a></strong>)中激活先前创建的仓库</p>
-<p><img src="../images/ActivateRepository.png" alt="activate a repository"></p>
+<p><img src="/images/ActivateRepository.png" alt="activate a repository"></p>
 <p>&emsp;&emsp;在设置中，将该仓库设置为Trusted，同时填写Harbor镜像仓库的用户名及密码，生成Secret</p>
-<p><img src="../images/Trusted.png" alt="set repository Trusted"></p>
-<p><img src="../images/AddSecret.png" alt="add secrets"></p>
+<p><img src="/images/Trusted.png" alt="set repository Trusted"></p>
+<p><img src="/images/AddSecret.png" alt="add secrets"></p>
 <h4 id="Harbor"><a href="#Harbor" class="headerlink" title="Harbor"></a>Harbor</h4><p>在需要访问的用户主机上，/etc/hosts文件中添加如下内容：</p>
 <blockquote>
 <p>192.168.3.139 harbor.example.com</p>
 </blockquote>
 <p>&emsp;&emsp;登录到Harbor(<strong><a href="https://harbor.example.com" target="_blank" rel="noopener">https://harbor.example.com</a></strong>)中，创建想要存放镜像的项目仓库(已经存在则跳过)</p>
-<p><img src="../images/CreateHarborProject.png" alt="create a harbor project"></p>
+<p><img src="/images/CreateHarborProject.png" alt="create a harbor project"></p>
 <h4 id="代码主目录"><a href="#代码主目录" class="headerlink" title="代码主目录"></a>代码主目录</h4><p>&emsp;&emsp;在本地的代码目录下，除了开发人员需要编写的逻辑代码，还需要添加四个部分的目录/文件：</p>
-<p><img src="../images/AddFile.png" alt="add files"></p>
+<p><img src="/images/AddFile.png" alt="add files"></p>
 <h5 id="config文件-直接复制"><a href="#config文件-直接复制" class="headerlink" title="config文件(直接复制)"></a>config文件(直接复制)</h5><p>&emsp;&emsp;.kube文件夹下的config文件，可直接从master(<strong>n138</strong>)节点中的/root/.kube/文件夹下复制过来，用于构建过程与Kubernetes集群进行交互</p>
 <h5 id="Dockerfile-自行编写"><a href="#Dockerfile-自行编写" class="headerlink" title="Dockerfile(自行编写)"></a>Dockerfile(自行编写)</h5><p>&emsp;&emsp;Dockerfile文件用于告知镜像的打包方式，示例中基于tomcat镜像，将打包后的war文件复制到特定的目录下，随后指定生成新镜像的启动命令</p>
-<p><img src="../images/Dockerfile.png" alt="Dockerfile"></p>
+<p><img src="/images/Dockerfile.png" alt="Dockerfile"></p>
 <h5 id="deploy文件夹-适当修改"><a href="#deploy文件夹-适当修改" class="headerlink" title="deploy文件夹(适当修改)"></a>deploy文件夹(适当修改)</h5><p>&emsp;&emsp;deploy文件夹下存放着服务如何运行以及如何暴露给用户访问的配置文件，分别为demo.yaml和ingree.yaml</p>
 <p>demo.yaml中修改为想要项目名称(需提前创建)和仓库名称，注意保持标签的一致</p>
-<p><img src="../images/Deployment.png" alt="Deployment"></p>
+<p><img src="/images/Deployment.png" alt="Deployment"></p>
 <p>ingress.yaml中修改想要暴露的名称与路径，注意保持服务名称和端口的一致</p>
-<p><img src="../images/Ingress.png" alt="Ingress"></p>
+<p><img src="/images/Ingress.png" alt="Ingress"></p>
 <p>在需要访问的用户主机上，/etc/hosts文件中添加如下内容：</p>
 <blockquote>
 <p>192.168.3.138 petclinic.example.com</p>
 </blockquote>
 <h5 id="drone-yml-适当修改"><a href="#drone-yml-适当修改" class="headerlink" title=".drone.yml(适当修改)"></a>.drone.yml(适当修改)</h5><p>&emsp;&emsp;.drone.yml文件中定义了开发人员在将代码推送到仓库后进行的一系列操作：</p>
 <p>1.克隆远程仓库(无需修改)</p>
-<p><img src="../images/Clone.png" alt="Clone"></p>
+<p><img src="/images/Clone.png" alt="Clone"></p>
 <p>2.执行编译打包操作，示例中对应mvn package，注意不同的编译方式有不同的缓存目录</p>
-<p><img src="../images/Maven.png" alt="Maven"></p>
-<p><img src="../images/Cache.png" alt="Cache"></p>
+<p><img src="/images/Maven.png" alt="Maven"></p>
+<p><img src="/images/Cache.png" alt="Cache"></p>
 <p>3.利用前面准备好的Dockerfile文件，生成镜像并推送到Harbor中</p>
-<p><img src="../images/Publish.png" alt="Publish"></p>
+<p><img src="/images/Publish.png" alt="Publish"></p>
 <p>4.在Kubernetes集群中部署运行(无需修改)</p>
-<p><img src="../images/Deploy.png" alt="Deploy"></p>
+<p><img src="/images/Deploy.png" alt="Deploy"></p>
 <h4 id="用户访问"><a href="#用户访问" class="headerlink" title="用户访问"></a>用户访问</h4><p>&emsp;&emsp;代码推送完成，等待Drone完成构建集成后，便可以打开浏览器对服务进行访问：</p>
-<p><img src="../images/DroneSuccess.png" alt="Drone Success"></p>
-<p><img src="../images/Petclinic.png" alt="Petclinic"></p>
+<p><img src="/images/DroneSuccess.png" alt="Drone Success"></p>
+<p><img src="/images/Petclinic.png" alt="Petclinic"></p>
 
       
     </div>
